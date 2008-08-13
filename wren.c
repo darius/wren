@@ -70,7 +70,7 @@ struct Header {
   unsigned binding:    14;
   unsigned arity:       4;
   unsigned name_length: 4;
-  char     name[0];
+  unsigned char name[0];
 } __attribute__((packed));  /* XXX gcc dependency */
 
 static unsigned char the_store[store_capacity];
@@ -139,6 +139,7 @@ static const Header *lookup (const unsigned char *dict,
 }
 
 #ifndef NDEBUG
+#if 0
 static void dump (const unsigned char *dict, 
                   const unsigned char *end)
 {
@@ -150,6 +151,7 @@ static void dump (const unsigned char *dict,
               h->kind, h->binding, h->arity);
     }
 }
+#endif
 #endif
 
 
@@ -201,6 +203,7 @@ static const unsigned char primitive_dictionary[] =
   };
 
 #ifndef NDEBUG
+#if 0
 static void dump_dictionary (void)
 {
   printf ("dictionary:\n");
@@ -208,6 +211,7 @@ static void dump_dictionary (void)
   dump (primitive_dictionary,
         primitive_dictionary + sizeof primitive_dictionary);
 }
+#endif
 #endif
 
 /* Run VM code starting at 'pc', with the stack allocated the space between
@@ -671,7 +675,7 @@ static void parse_factor (int precedence)
 
     case '\'':                  /* string constant */
       gen (PUSH_STRING);
-      compiler_ptr += strlen (compiler_ptr) + 1;
+      compiler_ptr += strlen ((const char *)compiler_ptr) + 1;
       next ();
       break;
 
