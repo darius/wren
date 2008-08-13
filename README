@@ -1,0 +1,52 @@
+Quick start:
+
+1. Edit the configuration defs at the top of wren.c. It's currently
+   configured for a little-endian machine. I know, it shouldn't be
+   necessary.
+
+2. make
+
+3. ./check-examples
+
+5. ./build
+   (This makes a stripped executable optimized for size.)
+
+4. ./benchmark
+   Notice how much faster it is than Python! Gee whiz.
+
+6. Look over the examples file to get an idea what you can do.
+   (It was mainly written as a basic testsuite though.)
+
+7. Look over TODO to see all the stuff not done.
+
+One thing that's probably not obvious is that you can define arrays
+or other dynamic datastructures in a Wren program. The thing is, you
+have to use peek and poke. But you can allocate the space for it so
+the interpreter doesn't step all over it, by incrementing the 'cp'
+variable (short for compiler_ptr, its name at the C level). Same 
+basic idea as ALLOT in Forth: get the current value of cp as the 
+starting address for your data structure, then increment cp by its
+size.
+
+Have fun!
+
+
+Copyright (c) 2007 Darius Bacon <darius@wry.me>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
