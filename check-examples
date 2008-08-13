@@ -1,0 +1,3 @@
+cat examples | ./wren >examples.out &&
+diff -u examples.expected examples.out
+

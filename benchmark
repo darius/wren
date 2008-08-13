@@ -1,0 +1,2 @@
+#!/bin/sh
+time ./wren <fib.wren

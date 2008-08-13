@@ -1,0 +1,48 @@
+basic interface to the hosting C program
+  (with wren_ prefixes & header file)
+better error reporting and recovery
+warn when memory gets low
+optional preloaded standard library
+  (not in RAM -- I suppose we'd interpret the high bit of our 16-bit
+  pointers as indicating it's in ROM space)
+write a bigger example, something vaguely useful
+fix remaining XXXs
+tauten and clean up the code
+optionally compile VM code into flash (I guess this'd obviate the 
+  separate ROM addressing, above)
+make it easier to add/remove primitives
+improve safety in the face of pokes
+measure size of VM-compiled programs
+make VM encoding a bit more compact (the easy stuff)
+check for keyboard interrupt (or equivalent)
+basic debugging support
+  * backtrace, at least
+  * 'panic' primitive
+  * decompiler?
+
+do something about (-1) as a literal? (parens ugly)
+make 'else' clause optional?
+require some end-of-function delimiter to reduce scope for ambiguity?
+  (especially the treatment of newlines)
+
+a cleverer VM encoding vaguely along the lines of 'Little Smalltalk':
+  * 4-bit split (opcode-family, parameter)
+  * two 'misc' families with the opcode in the parameter part
+  * extended-parameter families 
+    (with 4-bit family code followed by 1- or 2-byte parameter value)
+  * the obvious families like PUSH, FETCH_LOCAL, BRANCH, JUMP
+  * the remaining space can go to combined superinstructions
+    (interpreted from a 16-byte table for each such family; the
+    peephole optimizer uses the same tables)
+along with:
+  a 2-pass compiler, comprising:
+    * parse and generate intermediate code forwards
+      (intermediate code is pretty much like the current simple instruction
+      set, but designed to be read only from the end backwards)
+    * peephole-optimize backwards, converting to actual VM code
+    * (and finally, memmove() the VM code into place; it will have shrunk)
+  a self-hosted compiler, to take advantage of the above
+    (it should be smaller overall than the C-compiled compiler)
+syntax extensible at runtime, using the above
+closures allocated into the dictionary, a la Forth's CREATE DOES>
+nested 'let' and 'fun'

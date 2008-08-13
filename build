@@ -1,0 +1,4 @@
+#!/bin/sh
+make clean &&
+make CFLAGS="-Os -DNDEBUG" &&
+strip wren

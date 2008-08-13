@@ -1,0 +1,46 @@
+3-2
+1/5
+((5-2)*3+7)*4
+(1-(2-3)*9)/2
+(9-(8-(7-(6-5))))
+
+fun fib n = if n < 2    # Fibonacci function.
+            then 1
+            else fib(n-1) + fib(n-2)
+fib 20
+
+fun cr = putc 10; 0     # Print a newline (and arbitrarily return 0).
+
+let accum = 42
+fun bump =              # Increment accum.
+    accum: accum + 1
+bump; bump; bump
+
+fun puts s =            # Print a string.
+    if *s then (putc *s; puts (s+1)) else 0
+puts 'Hello, world!'; cr
+
+fun putud u =           # Print an unsigned decimal.
+    if ult 9 u then putud (udiv u 10) else 0;
+    putc (*'0' + umod u 10)
+putud 42; cr
+putud (-1); cr
+
+fun abs n =             # Absolute value.
+    if n < 0 then -n else n
+
+fun putd n =            # Print a signed decimal.
+    if n < 0 then putc *'-' else 0;
+    putud (abs n)
+putd 2007; cr
+putd (-1); cr
+putd (sla 1 31); cr
+
+fun putx u =            # Print an unsigned hex number.
+  if ult 15 u then putx (srl u 4) else 0;
+  putc *('0123456789abcdef' + (u & 0xf))
+putx 0xDEADbeef; cr
+
+forget abs              # Reclaim memory from 'abs' and everything after.
+abs 10
+putud (sla 1 31); cr
