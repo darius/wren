@@ -224,10 +224,10 @@ static Value run (const Instruc *pc, const Instruc *end)
   Value *sp = (Value *) (((unsigned)dictionary_ptr) & ~(sizeof (Value) - 1));
   Value *bp = sp;
 
-#define need(n)                         \
-  do {                                  \
+#define need(n)                                        \
+  do {                                                 \
     if ((unsigned char *)sp - (n)*sizeof(Value) < end) \
-      goto stack_overflow;              \
+      goto stack_overflow;                             \
   } while (0)
 
   for (;;)
