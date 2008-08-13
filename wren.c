@@ -15,14 +15,11 @@ enum {
   loud = 0,
 };
 
-/* Type of a Wren-language value. */
-typedef int Value;
-
-/* Endian-sensitive; yucko, sorry. 
-   I've used the first definition on my PowerPC Mac (big-endian)
-   and the second definition on Linux x86 (little-endian), with gcc
-   both times. XXX Really I should recode this without the machine-
-   dependent bitfields instead. */
+/* Pick the definition that goes with the endianness of your computer.
+   (Yucko, sorry.)
+   I've used the first one on PowerPC Mac (big-endian) and the second
+   on Linux x86 (little-endian), with gcc both times.  XXX recode this
+   without the machine-dependent bitfields instead. */
 #if 0
 # define PRIM_HEADER(opcode, arity, name_length) \
     a_primitive<<6, opcode, ((arity)<<4|(name_length))
@@ -30,6 +27,9 @@ typedef int Value;
 # define PRIM_HEADER(opcode, arity, name_length) \
     (opcode)<<2|a_primitive, 0, ((name_length)<<4|(arity))
 #endif
+
+/* Type of a Wren-language value. */
+typedef int Value;
 
 
 /* Error state */
