@@ -1,4 +1,5 @@
-CFLAGS   := -g2 -Wall -W
+CFLAGS   := -m32 -g2 -Wall -W
+LDFLAGS  := -m32
 
 all: wren
 
