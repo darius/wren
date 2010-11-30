@@ -945,6 +945,7 @@ static void run_command (void)
 {
   complaint = NULL;
 
+  skip_newline ();
   if (token == 'f')             /* 'fun' */
     {
       next ();
