@@ -46,3 +46,6 @@ along with:
 syntax extensible at runtime, using the above
 closures allocated into the dictionary, a la Forth's CREATE DOES>
 nested 'let' and 'fun'
+
+
+take a look at http://bitlash.net/wiki/start
