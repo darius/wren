@@ -47,7 +47,6 @@ putud (sla 1 31); cr
 
 # Had an infinite loop on tail calls for this function
 fun sum a b = if a = 0
-		then b
-		else sum (a-1) (b+1)
-
+              then b
+              else sum (a-1) (b+1)
 sum 4 0
