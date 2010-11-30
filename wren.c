@@ -280,7 +280,7 @@ static Value run (const Instruc *pc, const Instruc *end)
      bp[0]: leftmost argument
             (This is also where the return value will go.)
      ...
-     bp[-(n-1)]: rightmost argument (where n is the number of arguments)
+     bp[-n+1]: rightmost argument (where n is the number of arguments)
      bp[-n]: pair of old bp and return address (in two half-words)
      ...temporaries...
      sp[0]: topmost temporary
@@ -321,7 +321,7 @@ static Value run (const Instruc *pc, const Instruc *end)
               unsigned char n = pc[0];
           /* XXX portability: this assumes two unsigned shorts fit in a Value */
               Value frame_info = sp[n];
-              memmove (bp, sp, n * sizeof (Value));
+              memmove (bp - n + 1, sp, n * sizeof (Value));
               sp = bp - n;
               sp[0] = frame_info;
             }

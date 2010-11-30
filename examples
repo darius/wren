@@ -44,3 +44,10 @@ putx 0xDEADbeef; cr
 forget abs              # Reclaim memory from 'abs' and everything after.
 abs 10
 putud (sla 1 31); cr
+
+# Had an infinite loop on tail calls for this function
+fun sum a b = if a = 0
+		then b
+		else sum (a-1) (b+1)
+
+sum 4 0
