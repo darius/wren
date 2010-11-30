@@ -660,9 +660,7 @@ static void parse_arguments (unsigned arity)
     parse_expr (20); /* 20 is higher than any operator precedence */
 }
 
-/* XXX probably we should have a separate newlines-ok flag instead
-   of pushing the precedence down here... */
-static void parse_factor (int precedence)
+static void parse_factor (void)
 {
   skip_newline ();
   switch (token)
@@ -751,13 +749,13 @@ static void parse_factor (int precedence)
 
     case '*':                   /* character fetch */
       next ();
-      parse_factor (precedence);
+      parse_factor ();
       gen (FETCH_BYTE);
       break;
 
     case '-':                   /* unary minus */
       next ();
-      parse_factor (precedence);
+      parse_factor ();
       gen (NEGATE);
       break;
 
@@ -777,7 +775,7 @@ static void parse_expr (int precedence)
 {
   if (complaint)
     return;
-  parse_factor (precedence);
+  parse_factor ();
   while (!complaint)
     {
       int l, rator;   /* left precedence and operator */
